@@ -15,7 +15,7 @@
 
 ## 利用node + npm实现命令行切换小程序开发环境
 > node的process监听命令行的参数,判断需要切换的环境;
-> node的fs读取需要的配置文件```config.dev.js|config.pro.js|onfig.test.js|config.pre.js```,并将内容写入到```./dist/config.js```
+> node的fs读取需要的配置文件```./configs/config.xxx.js```,并将内容写入到```./dist/config.js```
 > 小程序的```app.js```引入```./dist/config.js```配置文件
 
 ### 1.初始化
@@ -41,53 +41,57 @@
             domainName:"www.pre.com"
         }
      - main.js //node脚本
-            const process = require('process')
-            const fs = require('fs') //文件读取和写入
-            const arr = process.argv // 命令行参数[]
-            //遍历命令行参数
-            for (var i = 0; i < arr.length; i++) {
-                if(arr[i]=='dev'){
-                    //如果参数中有dev,则将config.dev.js复制并重命名为config.js
-                    let read = fs.readFileSync('./configs/config.dev.js','utf-8')
-                    fs.writeFile('./dist/config.js',read,'utf-8',err => {
-                        if(err){
-                            console.log('切换开发环境失败')
-                        }
+        const process = require('process')
+        const fs = require('fs') //文件读取和写入
+        const arr = process.argv // 命令行参数[]
+        //遍历命令行参数
+        for (var i = 0; i < arr.length; i++) {
+            if(arr[i]=='dev'){
+                //如果参数中有dev,则将config.dev.js复制并重命名为config.js
+                let read = fs.readFileSync('./configs/config.dev.js','utf-8')
+                fs.writeFile('./dist/config.js',read,'utf-8',err => {
+                    if(err){
+                        console.log('切换开发环境失败')
+                    }else{
                         console.log('切换开发环境成功')
-                    })
-                    break
-                }else if(arr[i]=='build'){
-                    //如果参数中有build,则将config.pro.js复制并重命名为config.js
-                    let read = fs.readFileSync('./configs/config.pro.js','utf-8')
-                    fs.writeFile('./dist/config.js',read,'utf-8',err => {
-                        if(err){
-                            console.log('切换生产环境失败')
-                        }
+                    }
+                })
+                break
+            }else if(arr[i]=='build'){
+                //如果参数中有build,则将config.pro.js复制并重命名为config.js
+                let read = fs.readFileSync('./configs/config.pro.js','utf-8')
+                fs.writeFile('./dist/config.js',read,'utf-8',err => {
+                    if(err){
+                        console.log('切换生产环境失败')
+                    }else{
                         console.log('切换生产环境成功')
-                    })
-                    break
-                }else if(arr[i]=='test'){
-                    //如果参数中有build,则将config.test.js复制并重命名为config.js
-                    let read = fs.readFileSync('./configs/config.test.js','utf-8')
-                    fs.writeFile('./dist/config.js',read,'utf-8',err => {
-                        if(err){
-                            console.log('切换测试环境失败')
-                        }
+                    }
+                })
+                break
+            }else if(arr[i]=='test'){
+                //如果参数中有build,则将config.test.js复制并重命名为config.js
+                let read = fs.readFileSync('./configs/config.test.js','utf-8')
+                fs.writeFile('./dist/config.js',read,'utf-8',err => {
+                    if(err){
+                        console.log('切换测试环境失败')
+                    }else{
                         console.log('切换测试环境成功')
-                    })
-                    break
-                }else if(arr[i]=='pre'){
-                    //如果参数中有build,则将config.pre.js复制并重命名为config.js
-                    let read = fs.readFileSync('./configs/config.pre.js','utf-8')
-                    fs.writeFile('./dist/config.js',read,'utf-8',err => {
-                        if(err){
-                            console.log('切换预发环境失败')
-                        }
+                    }
+                })
+                break
+            }else if(arr[i]=='pre'){
+                //如果参数中有build,则将config.pre.js复制并重命名为config.js
+                let read = fs.readFileSync('./configs/config.pre.js','utf-8')
+                fs.writeFile('./dist/config.js',read,'utf-8',err => {
+                    if(err){
+                        console.log('切换预发环境失败')
+                    }else{
                         console.log('切换预发环境成功')
-                    })
-                    break
-                }
+                    }
+                })
+                break
             }
+        }
     ```
 
 ### 3.修改小程序```app.js```
