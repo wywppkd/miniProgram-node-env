@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-      "dev": "node ./main.js dev",
-      "build": "node ./main.js build",
-      "test": "node ./main.js test",
-      "pre": "node ./main.js pre"
+    "dev": "node ./main.js dev",
+    "build": "node ./main.js build",
+    "test": "node ./main.js test",
+    "pre": "node ./main.js pre"
   },
   "keywords": [],
   "author": "",

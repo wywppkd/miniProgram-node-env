@@ -1,3 +1,3 @@
 module.exports = {
-    domainName:"www.pro.com"
+    originUrl:"www.pro.com"
 }

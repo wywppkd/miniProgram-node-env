@@ -2,6 +2,6 @@
 import config from './dist/config'
 App({
     globalData:{
-        domainName:config.domainName
+        originUrl:config.originUrl
     }
 })
